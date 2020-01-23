@@ -80,11 +80,11 @@ namespace DBDiffer.DiffResults
     public sealed class WoWToolsDiff
     {
         [JsonProperty("row")]
-        public object Record;
+        public object Record { get; set; }
         [JsonProperty("op")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public DiffOperation Operation;
+        public DiffOperation Operation { get; set; }
         [JsonProperty("diff")]
-        public List<Diff> Diffs;
+        public List<Diff> Diffs { get; set; }
     }
 }
