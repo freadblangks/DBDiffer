@@ -53,16 +53,15 @@ namespace DBDiffer.DiffResults
         public string ToJSONString(Formatting formatting = Formatting.None)
         {
             var result = new { data = this };
-
             return JsonConvert.SerializeObject(result, formatting, _converter);
         }
 
-        public string ToJSONString(int skip, int take, Formatting formatting = Formatting.None)
+        public string ToJSONString(int draw, int skip, int take, Formatting formatting = Formatting.None)
         {
             var eles = this.Skip(Math.Max(skip, 0)).Take(take <= 0 ? Count : take);
-            var result = new { data = eles };
+            var result = new { draw = draw, data = eles, recordsTotal = this.Count, recordsFiltered = this.Count };
 
-            return JsonConvert.SerializeObject(eles, formatting, _converter);
+            return JsonConvert.SerializeObject(result, formatting, _converter);
         }
 
         #region Interface
